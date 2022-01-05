@@ -1,3 +1,15 @@
+<?php
+    //koneksi database 
+    $server = "db4free.net";
+    $user = "yesica05";
+    $pass ="05012001esi";
+    $database ="double_u";
+
+    $koneksi = mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
+
+
+?>
+
 <DOCTYPE html>
 <html>
 <head>
@@ -45,10 +57,52 @@
                </select>
            </div>
 
+           <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
+           <button type="reset" class="btn btn-danger" name="breset">Kosongkan</button>
+
        </from>
     </div>
     </div>
     <!--Akhir card form-->
+
+    <!--Awal card Tabel-->
+    <div class="card mt-3">
+    <div class="card-header bg-success text-white ">
+        Daftar siswa
+    </div>
+    <div class="card-body">
+       
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>No.</th>
+                <th>NIS.</th>
+                <th>Nama.</th>
+                <th>Alamat.</th>
+                <th>Kelas.</th>
+                <th>aksi</th>
+            </tr>
+            <?php
+                $no = 1;
+                $tampil = mysqli_query($koneksi, "SELECT * FROM tsiswa order by id_siswa desc");
+                while($data = mysqli_fetch_array($tampil)) :
+
+            ?>
+            <tr>
+                <td><?=$no++;?></td>
+                <td><?=$data['nis']?></td>
+                <td><?=$data['nama']?></td>
+                <td><?=$data['alamat']?></td>
+                <td><?=$data['kelas']?></td>
+                <td>
+                    <a href="#" class="btn btn-warning"> Edit </a>
+                    <a href="#" class="btn btn-danger"> Hapus </a>
+                </td>
+            </tr>
+            <?php endwhile; //penutup perulangan while ?>
+        </table>
+    </div>
+    </div>
+    <!--Akhir card Tabel-->
 
 </div>
 <script type="text/javascript" src="js/bootstrap.min.js">
