@@ -7,6 +7,13 @@
 
     $koneksi = mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
 
+    //jika tombol simpan diklik 
+    if(isset($_POST['bsimpan']))
+    {
+        $simpan = mysqli_query($koneksi, "INSERT INTO tsiswa (nis, nama, alamat, kelas)
+                                         VALUES '$_POST[tnis]','$_POST[tnama]', '$_POST[talamat]', '$_POST[tkelas]',
+                                         ")
+    }
 
 ?>
 
